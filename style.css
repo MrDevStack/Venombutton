@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 42%, #f7f7f9 0%, #eeeef1 55%, #e2e2e7 100%);
+}
+
+#gl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* invisible hit area, the shader paints the body */
+.venom {
+  position: relative;
+  z-index: 2;
+  width: 272px;
+  height: 84px;
+  border: none;
+  border-radius: 42px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.venom:focus-visible {
+  box-shadow: 0 0 0 3px #f7f7f9, 0 0 0 6px #6d6df5;
+}
+
+.label {
+  display: inline-block;
+  color: #f2f2f5;
+  font: 800 25px/1 "Exo 2", "Segoe UI", system-ui, sans-serif;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.9), 0 0 12px rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* dark theme: open with ?dark */
+html.dark body {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1.3px) 0 0 / 22px 22px,
+    radial-gradient(110% 85% at 50% 45%, #10111a 0%, #08090d 60%, #050608 100%);
+}
+
+@media (pointer: fine) {
+  html.custom-cursor,
+  html.custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* fallback when WebGL2 is not available */
+html.no-gl .venom {
+  background: radial-gradient(120% 90% at 20% 10%, #3a3a3f, #0a0a0c 55%);
+  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.5);
+}
